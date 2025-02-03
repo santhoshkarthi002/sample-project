@@ -1,6 +1,7 @@
 import ButtonElement from "@/components/ButtonElement";
 import HeaderElement from "@/components/HeaderElement";
 import Table, { Column } from "@/components/list/Table";
+import { useNavigate } from "react-router-dom";
 
 export interface Product {
   id: number;
@@ -12,6 +13,9 @@ export interface Product {
 }
 
 const UserList = () => {
+
+  const navigate = useNavigate();
+
   const data: Product[] = [
     {
       id: 1,
@@ -83,7 +87,7 @@ const UserList = () => {
         header="Products"
         action={
           <div className="flex justify-end">
-            <ButtonElement onClick={() => console.log("Add User")}>
+            <ButtonElement onClick={() => navigate("/add-product")}>
               Add Products
             </ButtonElement>
           </div>

@@ -1,5 +1,5 @@
 
-export const EditUserPage = () => {
+export const EditProductPage = () => {
   return (
     <div>EditUserPage</div>
   )

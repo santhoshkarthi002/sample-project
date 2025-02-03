@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import AddUser from "./features/users/routes/AddUser";
-import EditUser from "./features/users/routes/EditUser";
 import UserList from "./features/users/routes/UserList";
 import RootLayout from "./layouts/RootLayout";
+import AddProduct from "./features/users/routes/AddProduct";
+import EditProduct from "./features/users/routes/EditProduct";
 
 // import { ProtectedRoute } from "./layouts/ProtectedRoute";
 
@@ -21,12 +21,12 @@ export const routes = createBrowserRouter([
         element: < UserList/>,
       },
       {
-        path: "/add-user",
-        element: < AddUser/>,
+        path: "/add-product",
+        element: < AddProduct/>,
       },
       {
-        path: "/edit-user/:id",
-        element: <EditUser />,
+        path: "/edit-product/:id",
+        element: <EditProduct />,
       },
      
     ],

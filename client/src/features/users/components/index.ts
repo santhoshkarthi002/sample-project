@@ -1,2 +1,2 @@
-export * from './AddUserPage'
-export * from './EditUserPage'
+export * from './AddProductPage'
+export * from './EditProductPage'
