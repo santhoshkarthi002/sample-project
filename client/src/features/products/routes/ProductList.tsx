@@ -11,7 +11,7 @@ export interface Product {
   price: string;
 }
 
-const UserList = () => {
+const ProductList = () => {
   const navigate = useNavigate();
 
   const data: Product[] = [
@@ -102,4 +102,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default ProductList;

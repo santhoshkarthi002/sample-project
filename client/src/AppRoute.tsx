@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import UserList from "./features/users/routes/UserList";
+import AddProduct from "./features/products/routes/AddProduct";
+import EditProduct from "./features/products/routes/EditProduct";
+import ProductList from "./features/products/routes/ProductList";
 import RootLayout from "./layouts/RootLayout";
-import AddProduct from "./features/users/routes/AddProduct";
-import EditProduct from "./features/users/routes/EditProduct";
 
 // import { ProtectedRoute } from "./layouts/ProtectedRoute";
 
@@ -18,7 +18,7 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: < UserList/>,
+        element: < ProductList/>,
       },
       {
         path: "/add-product",
