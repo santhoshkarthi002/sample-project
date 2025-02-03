@@ -1,9 +1,11 @@
-import React from 'react'
+import Table from "@/components/list/Table";
 
 const UserList = () => {
   return (
-    <div>UserList</div>
-  )
-}
+    <div className="container">
+      <Table />
+    </div>
+  );
+};
 
-export default UserList
+export default UserList;

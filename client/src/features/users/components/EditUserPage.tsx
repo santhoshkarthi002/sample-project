@@ -1,9 +1,7 @@
 import React from 'react'
 
-const EditUserPage = () => {
+export const EditUserPage = () => {
   return (
     <div>EditUserPage</div>
   )
 }
-
-export default EditUserPage

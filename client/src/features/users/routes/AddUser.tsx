@@ -1,9 +1,23 @@
-import React from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FormProvider, useForm } from "react-hook-form";
+import { AddUserPage } from "../components";
 
 const AddUser = () => {
-  return (
-    <div>AddUser</div>
-  )
-}
+  const methods = useForm();
 
-export default AddUser
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
+  return (
+    <div>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <AddUserPage />
+        </form>
+      </FormProvider>
+    </div>
+  );
+};
+
+export default AddUser;
