@@ -1,4 +1,4 @@
-import { Column } from "./Table";
+import { Column } from "./DataTable";
 
 const TableHeader = <T,>({ columns }: { columns: Column<T>[] }) => {
   return (

@@ -1,7 +1,7 @@
 import ButtonElement from "@/components/ButtonElement";
 import HeaderElement from "@/components/HeaderElement";
-import Table, { Column } from "@/components/list/Table";
-import { useNavigate } from "react-router-dom";
+import DataTable, { Column } from "@/components/list/DataTable";
+import { Link, useNavigate } from "react-router-dom";
 
 export interface Product {
   id: number;
@@ -9,11 +9,9 @@ export interface Product {
   color: string;
   category: string;
   price: string;
-  action: string;
 }
 
 const UserList = () => {
-
   const navigate = useNavigate();
 
   const data: Product[] = [
@@ -23,7 +21,6 @@ const UserList = () => {
       color: "Silver",
       category: "Laptop",
       price: "$2999",
-      action: "Edit",
     },
     {
       id: 2,
@@ -31,7 +28,6 @@ const UserList = () => {
       color: "Black",
       category: "Laptop",
       price: "$2989",
-      action: "Edit",
     },
   ];
 
@@ -43,12 +39,12 @@ const UserList = () => {
       minWidth: 200,
       maxWidth: 200,
       renderCell: ({ row }: { row: Product }) => (
-        <a
-          href="#"
+        <Link
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          to={`/edit-product/${row.id}`}
         >
           {row.name}
-        </a>
+        </Link>
       ),
     },
     {
@@ -75,9 +71,15 @@ const UserList = () => {
     {
       name: "Action",
       header: "Action",
-      accessorKey: "action",
       minWidth: 100,
       maxWidth: 100,
+      renderCell: ({ row }: { row: Product }) => (        
+        <div className="flex justify-start">
+          <ButtonElement size="medium" onClick={() => navigate(`/edit-product/${row.id}`)}>
+            Edit
+          </ButtonElement>
+        </div>
+      ),
     },
   ];
 
@@ -94,7 +96,7 @@ const UserList = () => {
         }
       />
       <div className="my-5">
-        <Table columns={columns} tableData={data} />
+        <DataTable columns={columns} tableData={data} />
       </div>
     </div>
   );

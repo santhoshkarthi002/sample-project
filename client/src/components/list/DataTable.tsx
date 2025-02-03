@@ -5,13 +5,13 @@ import TableHeader from "./TableHeader";
 export interface Column<T> {
   name: string;
   header: string;
-  accessorKey: keyof T;
+  accessorKey?: keyof T;
   minWidth: number;
   maxWidth: number;
   renderCell?: (props: { row: T }) => ReactNode;
 }
 
-const Table = <T,>({
+const DataTable = <T,>({
   tableData,
   columns,
 }: {
@@ -28,4 +28,4 @@ const Table = <T,>({
   );
 };
 
-export default Table;
+export default DataTable;
