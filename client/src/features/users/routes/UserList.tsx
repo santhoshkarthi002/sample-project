@@ -38,7 +38,7 @@ const UserList = () => {
       accessorKey: "name",
       minWidth: 200,
       maxWidth: 200,
-      renderCell: ({ row }: any) => (
+      renderCell: ({ row }: { row: Product }) => (
         <a
           href="#"
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
@@ -78,7 +78,7 @@ const UserList = () => {
   ];
 
   return (
-    <div className="container mt-10">
+    <div className="container mt-4">
       <HeaderElement
         header="Products"
         action={

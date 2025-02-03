@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode } from "react";
 import TableBody from "./TableBody";
 import TableHeader from "./TableHeader";
@@ -21,7 +20,7 @@ const Table = <T,>({
 }) => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full my-0 align-middle text-dark border-neutral-900">
+      <table className="w-full align-middle text-dark border-neutral-900">
         <TableHeader columns={columns} />
         <TableBody columns={columns} data={tableData} />
       </table>
