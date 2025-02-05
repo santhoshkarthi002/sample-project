@@ -1,16 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import FormContainer from "@/components/FormContainer";
 import { useForm } from "react-hook-form";
-import { AddProductPage } from "../components";
+import { axiosInstance } from "@/axios";
+import { useNavigate } from "react-router-dom";
+import { ProductsElements } from "../components";
 
 const AddProduct = () => {
+  const navigate = useNavigate();
   const formCtx = useForm({
     mode: "onChange",
     delayError: 500,
   });
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    axiosInstance
+      .post("/products", data)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -20,7 +31,7 @@ const AddProduct = () => {
         <p className="text-gray-500">Add a new product to the store</p>
       </div>
       <FormContainer methods={formCtx} onSubmit={onSubmit}>
-        <AddProductPage />
+        <ProductsElements />
       </FormContainer>
     </div>
   );

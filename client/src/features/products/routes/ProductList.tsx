@@ -1,6 +1,7 @@
 import ButtonElement from "@/components/ButtonElement";
 import HeaderElement from "@/components/HeaderElement";
 import DataTable, { Column } from "@/components/list/DataTable";
+import { useGetData } from "@/hooks/useGetData";
 import { Link, useNavigate } from "react-router-dom";
 
 export interface Product {
@@ -14,22 +15,9 @@ export interface Product {
 const ProductList = () => {
   const navigate = useNavigate();
 
-  const data: Product[] = [
-    {
-      id: 1,
-      name: "Apple MacBook Pro 17",
-      color: "Silver",
-      category: "Laptop",
-      price: "$2999",
-    },
-    {
-      id: 2,
-      name: "hb",
-      color: "Black",
-      category: "Laptop",
-      price: "$2989",
-    },
-  ];
+  const { data } = useGetData<Product[]>({
+    url: "/products",
+  });
 
   const columns: Column<Product>[] = [
     {
@@ -73,9 +61,12 @@ const ProductList = () => {
       header: "Action",
       minWidth: 100,
       maxWidth: 100,
-      renderCell: ({ row }: { row: Product }) => (        
+      renderCell: ({ row }: { row: Product }) => (
         <div className="flex justify-start">
-          <ButtonElement size="medium" onClick={() => navigate(`/edit-product/${row.id}`)}>
+          <ButtonElement
+            size="medium"
+            onClick={() => navigate(`/edit-product/${row.id}`)}
+          >
             Edit
           </ButtonElement>
         </div>
@@ -96,7 +87,7 @@ const ProductList = () => {
         }
       />
       <div className="my-5">
-        <DataTable columns={columns} tableData={data} />
+        <DataTable columns={columns} tableData={data || []} />
       </div>
     </div>
   );
