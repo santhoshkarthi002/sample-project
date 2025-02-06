@@ -8,8 +8,11 @@ type ButtonProps = {
   width?: "full" | "auto" | string; // Button width: 'full', 'auto', or custom class
   disabled?: boolean; // Disable button
   onClick?: () => void; // Click handler for button
-  children: React.ReactNode; // Button text or content
   variant?: "contained" | "outlined" | "text"; // Button variant
+  icon?: React.ReactNode; // Icon as a React element (e.g., <FontAwesomeIcon />)
+  iconPosition?: "left" | "right"; // Position of the icon relative to the label
+  isLoading?: boolean;
+  label: string;
 };
 
 const ButtonElement: React.FC<ButtonProps> = ({
@@ -20,7 +23,10 @@ const ButtonElement: React.FC<ButtonProps> = ({
   width = "auto", // Default width is 'auto'
   disabled = false,
   onClick,
-  children,
+  icon,
+  iconPosition = "left",
+  isLoading = false,
+  label,
 }) => {
   // Define color classes based on the color variant
   const colorClasses = {
@@ -69,10 +75,26 @@ const ButtonElement: React.FC<ButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      disabled={disabled}
-      className={`block ${colorClasses[colorVariant]} ${sizeClasses[size]} ${widthClasses} cursor-pointer font-semibold rounded-md focus:outline-none  disabled:opacity-50`}
+      disabled={disabled || isLoading}
+      style={{
+        // backgroundColor: disabled || isLoading ? "#d1d5db" : "", // Gray for disabled or provided color
+        cursor: disabled || isLoading ? "not-allowed" : "pointer",
+      }}
+      className={` flex flex-row items-center justify-center space-x-2 ${
+        disabled || isLoading ? "#d1d5db" : colorClasses[colorVariant]
+      }  ${
+        sizeClasses[size]
+      } ${widthClasses} cursor-pointer font-semibold rounded-md focus:outline-none disabled:opacity-50`}
     >
-      {children}
+      {isLoading ? (
+        "Loading..."
+      ) : (
+        <>
+          {icon && iconPosition === "left" && <span>{icon}</span>}
+          <span>{label}</span>
+          {icon && iconPosition === "right" && <span>{icon}</span>}
+        </>
+      )}
     </button>
   );
 };

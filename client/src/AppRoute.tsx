@@ -3,32 +3,40 @@ import EditProduct from "./features/products/routes/EditProduct";
 import ProductList from "./features/products/routes/ProductList";
 import RootLayout from "./layouts/RootLayout";
 import AddProduct from "./features/products/routes/AddProduct";
+import { ProtectedRoute } from "./layouts/ProtectedRoute";
+import Login from "./auth/login/routes/Login";
+import Register from "./auth/register/routes/Register";
 
-// import { ProtectedRoute } from "./layouts/ProtectedRoute";
 
 export const routes = createBrowserRouter([
-    
   {
     path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register/>,
+  },
+  {
+    path: "/admin",
     element: (
-    //   <ProtectedRoute>
+      <ProtectedRoute>
         <RootLayout />
-    //   </ProtectedRoute>
+      </ProtectedRoute>
     ),
     children: [
       {
-        path: "/",
-        element: < ProductList/>,
+        path: "production-list",
+        element: <ProductList />,
       },
       {
-        path: "/add-product",
-        element: < AddProduct/>,
+        path: "add-product",
+        element: <AddProduct />,
       },
       {
-        path: "/edit-product/:id",
+        path: "edit-product/:id",
         element: <EditProduct />,
       },
-     
     ],
   },
 ]);

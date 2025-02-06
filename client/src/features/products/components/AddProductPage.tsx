@@ -25,7 +25,7 @@ export const AddProductPage = () => {
           type="number"
           required
         />
-        <ButtonElement type="submit">Add Product</ButtonElement>
+        <ButtonElement type="submit" label="Add Product" />
       </div>
     </div>
   );

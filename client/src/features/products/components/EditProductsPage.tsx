@@ -26,7 +26,7 @@ export const EditProductsPage = ({ data }: { data: Product }) => {
       .put( `/products/${id}`, data)
       .then((res) => {
         console.log(res);
-        navigate("/");
+        navigate("/admin/production-list");
       })
       .catch((err) => {
         console.log(err);
@@ -65,7 +65,7 @@ export const EditProductsPage = ({ data }: { data: Product }) => {
             type="number"
             required
           />
-          <ButtonElement type="submit">Add Product</ButtonElement>
+          <ButtonElement type="submit" label="Update Product" />
         </div>
       </FormContainer>
     </div>

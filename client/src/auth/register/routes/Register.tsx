@@ -1,32 +1,27 @@
 import FormContainer from "@/components/FormContainer";
-import { LoginPage } from "../components";
 import { useForm } from "react-hook-form";
-import { LoginData } from "../types";
-import { useNavigate } from "react-router-dom";
+import { RegisterPage } from "../components";
+import { RegisterData } from "../types";
 
-const Login = () => {
-  const formCtx = useForm<LoginData>({
+const Register = () => {
+  const formCtx = useForm<RegisterData>({
     mode: "onChange",
     delayError: 500,
   });
 
-  const navigate = useNavigate();
-
-  const onSubmit = (data: LoginData) => {
+  const onSubmit = (data: RegisterData) => {
     console.log(data);
-    localStorage.setItem("isAuthenticated", "true");
-    navigate("/admin/home");
   };
 
   return (
     <div className="flex items-center justify-center h-screen ">
       <div className="w-[500px] md:bg-gray-100 p-6 rounded-lg">
         <FormContainer methods={formCtx} onSubmit={onSubmit}>
-          <LoginPage />
+          <RegisterPage />
         </FormContainer>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

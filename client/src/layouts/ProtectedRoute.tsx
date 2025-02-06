@@ -1,16 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const ProtectedRoute = ({ children }:{children:React.ReactNode}) => {
   // TODO: Implement authentication logic here
 
-  const isAuthenticated = true;
-  const navigate = useNavigate()
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
+
 
   if (!isAuthenticated) {
-    navigate("/login");
-    return <div>You are not authorized to access this page</div>;
+    // Redirect to login if not authenticated
+    return <Navigate to="/" />;
   }
 
-  return <div>{children}</div>;
+  return children;
 };
