@@ -1,37 +1,25 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import FormContainer from "@/components/FormContainer";
-import { ProductsElements } from "../components";
-import { axiosInstance } from "@/axios";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useGetData } from "@/hooks/useGetData";
+import { useParams } from "react-router-dom";
+import { Product } from "../types";
+import { EditProductsPage } from "../components";
 
 const EditProduct = () => {
-  const navigate = useNavigate();
-  const formCtx = useForm({
-    mode: "onChange",
-    delayError: 500,
+  const { id } = useParams();
+
+  const { data, loading } = useGetData<Product>({
+    url: `/products/${id}`,
+    pathParams: { id: String(id) },
   });
 
-  const onSubmit = (data: any) => {
-    axiosInstance
-      .put("/products/", data)
-      .then((res) => {
-        console.log(res);
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+ 
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-2xl font-bold">Add Product</h1>
-        <p className="text-gray-500">Add a new product to the store</p>
+        <h1 className="text-2xl font-bold">Edit Product</h1>
+        <p className="text-gray-500">Edit your product here</p>
       </div>
-      <FormContainer methods={formCtx} onSubmit={onSubmit}>
-        <ProductsElements />
-      </FormContainer>
+
+      {loading ? <p>Loading...</p> : <EditProductsPage data={data as Product} />}
     </div>
   );
 };

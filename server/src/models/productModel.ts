@@ -23,6 +23,9 @@ class Products {
       [product.name, product.price, product.color, product.category, id]
     );
   }
+  static async deleteProduct(id: number) {
+    return await pool.query("DELETE FROM products WHERE id = $1", [id]);
+  }
 }
 
 module.exports = Products;

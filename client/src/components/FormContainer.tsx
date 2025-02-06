@@ -1,17 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { FormProvider, UseFormReturn } from "react-hook-form";
+import { FormProvider, UseFormReturn, FieldValues } from "react-hook-form";
 
-interface FormContainerProps {
-  methods: UseFormReturn<any>;
-  onSubmit: <T>(data: T) => void;
+interface FormContainerProps<T extends FieldValues> {
+  methods: UseFormReturn<T>;
+  onSubmit: (data: T) => void;
   children: React.ReactNode;
 }
 
-const FormContainer: React.FC<FormContainerProps> = ({
-  methods,
-  onSubmit,
-  children,
-}) => {
+const FormContainer = <T extends FieldValues>({ methods, onSubmit, children }: FormContainerProps<T>) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4 p-4">

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { axiosInstance } from "@/axios";
 import FormContainer from "@/components/FormContainer";
 import { useForm } from "react-hook-form";
-import { axiosInstance } from "@/axios";
 import { useNavigate } from "react-router-dom";
-import { ProductsElements } from "../components";
+import { AddProductPage } from "../components";
 
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const AddProduct = () => {
         <p className="text-gray-500">Add a new product to the store</p>
       </div>
       <FormContainer methods={formCtx} onSubmit={onSubmit}>
-        <ProductsElements />
+        <AddProductPage />
       </FormContainer>
     </div>
   );

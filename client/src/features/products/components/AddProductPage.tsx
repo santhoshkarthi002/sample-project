@@ -1,7 +1,7 @@
 import ButtonElement from "@/components/ButtonElement";
 import InputElement from "@/components/InputElement";
 
-export const ProductsElements = () => {
+export const AddProductPage = () => {
   return (
     <div className="w-[500px]">
       <div className="flex flex-col items-center justify-center">

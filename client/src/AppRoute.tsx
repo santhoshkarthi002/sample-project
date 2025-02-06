@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import AddProduct from "./features/products/routes/AddProduct";
 import EditProduct from "./features/products/routes/EditProduct";
 import ProductList from "./features/products/routes/ProductList";
 import RootLayout from "./layouts/RootLayout";
+import AddProduct from "./features/products/routes/AddProduct";
 
 // import { ProtectedRoute } from "./layouts/ProtectedRoute";
 

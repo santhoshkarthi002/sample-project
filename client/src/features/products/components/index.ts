@@ -1,1 +1,2 @@
-export * from './ProductsElements'
+export * from './AddProductPage'
+export * from './EditProductsPage'

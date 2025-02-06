@@ -3,21 +3,27 @@ import HeaderElement from "@/components/HeaderElement";
 import DataTable, { Column } from "@/components/list/DataTable";
 import { useGetData } from "@/hooks/useGetData";
 import { Link, useNavigate } from "react-router-dom";
-
-export interface Product {
-  id: number;
-  name: string;
-  color: string;
-  category: string;
-  price: string;
-}
+import { Product } from "../types";
+import { axiosInstance } from "@/axios";
 
 const ProductList = () => {
   const navigate = useNavigate();
 
-  const { data } = useGetData<Product[]>({
+  const { data, refetch } = useGetData<Product[]>({
     url: "/products",
   });
+
+  const handleDelete = async (id: number) => {
+    axiosInstance
+      .delete(`/products/${id}`)
+      .then(() => {
+        console.log("Deleted");
+        refetch();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const columns: Column<Product>[] = [
     {
@@ -65,9 +71,11 @@ const ProductList = () => {
         <div className="flex justify-start">
           <ButtonElement
             size="medium"
-            onClick={() => navigate(`/edit-product/${row.id}`)}
+            variant="text"
+            colorVariant="danger"
+            onClick={() => handleDelete(row.id)}
           >
-            Edit
+            Delete
           </ButtonElement>
         </div>
       ),

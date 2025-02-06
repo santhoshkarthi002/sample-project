@@ -49,6 +49,7 @@ const InputElement = ({
         render={({ field }) => (
           <input
             {...field}
+            value={field.value || ""}
             placeholder={placeholder}
             type={type}
             className={`mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
