@@ -17,7 +17,7 @@ const AddProduct = () => {
       .post("/products", data)
       .then((res) => {
         console.log(res);
-        navigate("/admin/production-list");
+        navigate("/admin/product-list");
       })
       .catch((err) => {
         console.log(err);
