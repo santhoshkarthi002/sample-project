@@ -35,7 +35,7 @@ const ProductList = () => {
       renderCell: ({ row }: { row: Product }) => (
         <Link
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          to={`/edit-product/${row.id}`}
+          to={`/admin/edit-product/${row.id}`}
         >
           {row.name}
         </Link>
@@ -74,9 +74,8 @@ const ProductList = () => {
             variant="text"
             colorVariant="danger"
             onClick={() => handleDelete(row.id)}
-          >
-            Delete
-          </ButtonElement>
+            label="Delete"
+          />
         </div>
       ),
     },
@@ -88,9 +87,10 @@ const ProductList = () => {
         header="Products"
         action={
           <div className="flex justify-end">
-            <ButtonElement onClick={() => navigate("/add-product")}>
-              Add Products
-            </ButtonElement>
+            <ButtonElement
+              onClick={() => navigate("/admin/add-product")}
+              label="Add Product"
+            />
           </div>
         }
       />

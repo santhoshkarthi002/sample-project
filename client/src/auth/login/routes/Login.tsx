@@ -15,7 +15,7 @@ const Login = () => {
   const onSubmit = (data: LoginData) => {
     console.log(data);
     localStorage.setItem("isAuthenticated", "true");
-    navigate("/admin/home");
+    navigate("/admin/production-list");
   };
 
   return (
