@@ -1,10 +1,16 @@
 import { Outlet } from "react-router-dom";
+import SideBar from "./SideBar";
+import HeaderElement from "./HeaderElement";
 
 const RootLayout = () => {
   return (
-    <div className="mx-auto  w-[1200px] h-[720px] flex flex-col">
-      <div className="flex flex-col items-center justify-center p-10">
-        <Outlet />
+    <div className=" flex flex-col">
+      <HeaderElement />
+      <div className="flex flex-row justify-center">
+        <SideBar />
+        <div className=" flex flex-col mx-auto w-[1200px] h-[720px]">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

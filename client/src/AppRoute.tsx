@@ -7,7 +7,6 @@ import { ProtectedRoute } from "./layouts/ProtectedRoute";
 import Login from "./auth/login/routes/Login";
 import Register from "./auth/register/routes/Register";
 
-
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -15,7 +14,7 @@ export const routes = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <Register/>,
+    element: <Register />,
   },
   {
     path: "/admin",
@@ -26,16 +25,41 @@ export const routes = createBrowserRouter([
     ),
     children: [
       {
-        path: "product-list",
-        element: <ProductList />,
+        path: "dashboard",
+        element: <div>Dashboard</div>,
       },
       {
-        path: "add-product",
-        element: <AddProduct />,
+        path: "analytics",
+        element: <div>Analytics</div>,
       },
       {
-        path: "edit-product/:id",
-        element: <EditProduct />,
+        path: "reporting",
+        element: <div>Reporting</div>,
+      },
+      {
+        path: "projects",
+        element: <div>Projects</div>,
+      },
+      {
+        path: "orders",
+        element: <div>Orders</div>,
+      },
+      {
+        path: "products",
+        children: [
+          {
+            path: "list",
+            element: <ProductList />,
+          },
+          {
+            path: "add",
+            element: <AddProduct />,
+          },
+          {
+            path: "edit/:id",
+            element: <EditProduct />,
+          },
+        ],
       },
     ],
   },
