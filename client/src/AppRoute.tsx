@@ -61,6 +61,18 @@ export const routes = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "inbox",
+        element: <div>Inbox</div>,
+      },
+      {
+        path: "profile",
+        element: <div>Profile</div>,
+      },
+      {
+        path: "settings",
+        element: <div>Settings</div>,
+      },
     ],
   },
 ]);

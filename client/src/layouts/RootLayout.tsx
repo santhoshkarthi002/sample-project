@@ -8,7 +8,7 @@ const RootLayout = () => {
       <HeaderElement />
       <div className="flex flex-row justify-center">
         <SideBar />
-        <div className=" flex flex-col mx-auto w-[1200px] h-[720px]">
+        <div className=" flex flex-col mx-auto w-[1500px] h-[720px] px-3">
           <Outlet />
         </div>
       </div>

@@ -18,7 +18,7 @@ const Login = () => {
       .post("/auth/login", data)
       .then((res) => {
         localStorage.setItem("isAuthenticated", res.data.token);
-        navigate("/admin/product-list");
+        navigate("/admin/products/list");
       })
       .catch((err) => {
         console.log(err);

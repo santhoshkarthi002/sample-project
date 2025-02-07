@@ -35,7 +35,7 @@ const ProductList = () => {
       renderCell: ({ row }: { row: Product }) => (
         <Link
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          to={`/admin/edit-product/${row.id}`}
+          to={`/admin/products/edit/${row.id}`}
         >
           {row.name}
         </Link>
@@ -88,7 +88,7 @@ const ProductList = () => {
         action={
           <div className="flex justify-end">
             <ButtonElement
-              onClick={() => navigate("/admin/add-product")}
+              onClick={() => navigate("/admin/products/add")}
               label="Add Product"
             />
           </div>

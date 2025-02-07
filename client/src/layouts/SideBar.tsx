@@ -5,42 +5,50 @@ import { HiShoppingBag } from "react-icons/hi2";
 import { MdAnalytics, MdDashboardCustomize } from "react-icons/md";
 import { RiMenuFold3Fill } from "react-icons/ri";
 import { TbReportAnalytics } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import InboxIcon from "../../public/InboxIcon";
 import Logout from "../../public/Logout";
 import Profile from "../../public/Profile";
 import Settings from "../../public/Settings";
+import Tooltip from "@/components/Tooltip";
+import { RiMenuFold4Fill } from "react-icons/ri";
 
 const sideBarItemsMain = [
   {
     name: "Dashboard",
     icon: MdDashboardCustomize,
     link: "/admin/dashboard",
+    key: "dashboard",
   },
   {
     name: "Analytics",
     icon: MdAnalytics,
     link: "/admin/analytics",
+    key: "analytics",
   },
   {
     name: "Reporting",
     icon: TbReportAnalytics,
     link: "/admin/reporting",
+    key: "reporting",
   },
   {
     name: "Projects",
     icon: FaDiagramProject,
     link: "/admin/projects",
+    key: "projects",
   },
   {
     name: "Orders",
     icon: HiShoppingBag,
     link: "/admin/orders",
+    key: "orders",
   },
   {
     name: "Products",
     icon: AiFillProduct,
-    link: "/admin/products",
+    link: "/admin/products/list",
+    key: "products",
   },
 ];
 
@@ -48,28 +56,34 @@ const sideBarItemsSub = [
   {
     name: "Inbox",
     icon: InboxIcon,
-    link: "/inbox",
+    link: "/admin/inbox",
     badge: 14,
+    key: "inbox",
   },
   {
     name: "Profile",
     icon: Profile,
-    link: "/profile",
+    link: "/admin/profile",
+    key: "profile",
   },
   {
     name: "Settings",
     icon: Settings,
-    link: "/settings",
+    link: "/admin/settings",
+    key: "settings",
   },
   {
     name: "Log Out",
     icon: Logout,
-    link: "/logout",
+    link: "#",
+    key: "logout",
   },
 ];
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const isUpdate = false;
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -77,9 +91,9 @@ const SideBar = () => {
 
   return (
     <div
-      className={`relative flex h-[93vh] w-full ${
-        isOpen ? "max-w-[20rem]" : "max-w-[4rem]"
-      } flex-col rounded-xl bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5`}
+      className={`relative flex h-[93vh] w-full p-2 ${
+        isOpen ? "max-w-[20rem] " : "max-w-[4.5rem] items-center mt-2"
+      } flex-col rounded-xl bg-white bg-clip-border  text-gray-700 shadow-xl shadow-blue-gray-900/5`}
     >
       {isOpen ? (
         <div className="py-2 mb-2 flex items-center justify-between">
@@ -90,7 +104,9 @@ const SideBar = () => {
             className="flex items-center gap-2 cursor-pointer"
             onClick={handleClick}
           >
-            <RiMenuFold3Fill size={25} />
+            <Tooltip text="Close Sidebar" position="left">
+              <RiMenuFold3Fill size={25} />
+            </Tooltip>
           </div>
         </div>
       ) : (
@@ -98,28 +114,47 @@ const SideBar = () => {
           className="flex items-center gap-2 cursor-pointer"
           onClick={handleClick}
         >
-          <RiMenuFold3Fill size={25} />
+          <Tooltip text="Open Sidebar" position="right">
+            <RiMenuFold4Fill size={25} />
+          </Tooltip>
         </div>
       )}
       <nav
         className={`flex ${
-          isOpen ? "min-w-[240px]" : "min-w-[20px]"
-        } flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700`}
+          isOpen ? "min-w-[240px]" : "min-w-[20px] "
+        } flex-col gap-1 font-sans text-base font-normal text-blue-gray-700`}
       >
-        <div className="relative block w-full">
-          <div className="overflow-hidden">
-            <div className="block w-full py-1 font-sans text-sm antialiased font-light leading-normal text-gray-700">
-              <nav className="flex min-w-[240px] flex-col gap-1 p-0 font-sans text-base font-normal text-blue-gray-700">
+        <div className="w-full">
+          <div className={`${isOpen ? "overflow-hidden" : "mt-5"}`}>
+            <div className="w-full py-1 font-sans text-sm  font-light leading-normal text-gray-700">
+              <nav className="flex flex-col gap-1 font-sans text-base font-normal ">
                 {sideBarItemsMain.map((item, index) => {
+                  const isActiveMain = location.pathname === item.link; // Check active route
+                  const isActive = location.pathname.includes(item.key); // Check active route
+
                   return (
-                    <Link to={item.link} key={index}>
+                    <Link to={item.link} key={index} className="w-full">
                       <div
                         role="button"
-                        className="flex items-center w-full py-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                        className={`flex items-center w-full p-3 gap-5 transition-all rounded-lg outline-none text-start 
+                          ${
+                            isActiveMain
+                              ? `text-white bg-gray-800 ${isOpen ? "pl-6" : ""}`
+                              : isActive
+                              ? `text-white bg-gray-500 ${isOpen ? "pl-6" : ""}`
+                              : "hover:bg-blue-gray-50 hover:text-blue-gray-900"
+                          } 
+                          focus:bg-blue-gray-50 active:bg-blue-gray-50`}
                       >
-                        <div className="grid mr-4 place-items-center">
-                          <item.icon size={20} />
-                        </div>
+                        <Tooltip
+                          text={item.name}
+                          position="right"
+                          enabled={!isOpen}
+                        >
+                          <div className="flex items-center">
+                            <item.icon size={20} />
+                          </div>
+                        </Tooltip>
 
                         {isOpen && item.name}
                       </div>
@@ -132,28 +167,41 @@ const SideBar = () => {
         </div>
         <hr className="my-2 border-blue-gray-50" />
         {sideBarItemsSub.map((item, index) => {
+          const isActiveMain = location.pathname === item.link; // Check active route
+          const isActive = location.pathname.includes(item.key); // Check active route
           return (
-            <div
-              key={index}
-              role="button"
-              className="flex items-center w-full py-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
-            >
-              <div className="grid mr-4 place-items-center">
-                <item.icon />
-              </div>
-              {isOpen && item.name}
-              {isOpen && item.badge && (
-                <div className="grid ml-auto place-items-center justify-self-end">
-                  <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-full select-none whitespace-nowrap bg-blue-gray-500/20 text-blue-gray-900">
-                    <span className="">{item.badge}</span>
+            <Link to={item.link} key={index} className="w-full">
+              <div
+                role="button"
+                className={`flex items-center w-full p-3 gap-5 transition-all rounded-lg outline-none text-start 
+                          ${
+                            isActiveMain
+                              ? `text-white bg-gray-800 ${isOpen ? "pl-6" : ""}`
+                              : isActive
+                              ? `text-white bg-gray-500 ${isOpen ? "pl-6" : ""}`
+                              : "hover:bg-blue-gray-50 hover:text-blue-gray-900"
+                          } 
+                          focus:bg-blue-gray-50 active:bg-blue-gray-50`}
+              >
+                <Tooltip text={item.name} position="right" enabled={!isOpen}>
+                  <div className="flex items-center">
+                    <item.icon />
                   </div>
-                </div>
-              )}
-            </div>
+                </Tooltip>
+                {isOpen && item.name}
+                {isOpen && item.badge && (
+                  <div className="grid ml-auto place-items-center justify-self-end">
+                    <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-full select-none whitespace-nowrap bg-blue-gray-500/20 text-blue-gray-900">
+                      <span className="">{item.badge}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Link>
           );
         })}
       </nav>
-      {isOpen && (
+      {isUpdate && isOpen && (
         <div
           role="alert"
           className="relative flex w-full px-4 py-4 mt-auto text-base text-white bg-gray-900 rounded-lg font-regular"

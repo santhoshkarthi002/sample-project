@@ -29,10 +29,10 @@ const AddProduct = () => {
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-2xl font-bold">Add Product</h1>
         <p className="text-gray-500">Add a new product to the store</p>
+        <FormContainer methods={formCtx} onSubmit={onSubmit}>
+          <AddProductPage />
+        </FormContainer>
       </div>
-      <FormContainer methods={formCtx} onSubmit={onSubmit}>
-        <AddProductPage />
-      </FormContainer>
     </div>
   );
 };
