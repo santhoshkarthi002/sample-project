@@ -3,6 +3,7 @@ import { LoginPage } from "../components";
 import { useForm } from "react-hook-form";
 import { LoginData } from "../types";
 import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "@/axios";
 
 const Login = () => {
   const formCtx = useForm<LoginData>({
@@ -13,9 +14,15 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data: LoginData) => {
-    console.log(data);
-    localStorage.setItem("isAuthenticated", "true");
-    navigate("/admin/product-list");
+    axiosInstance
+      .post("/auth/login", data)
+      .then((res) => {
+        localStorage.setItem("isAuthenticated", res.data.token);
+        navigate("/admin/product-list");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
