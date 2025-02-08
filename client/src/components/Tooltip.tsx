@@ -20,7 +20,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, position = "top", enabled = tru
       {children}
       {enabled && (
         <div
-          className={`absolute ${positionClasses[position]} hidden group-hover:block bg-gray-800 text-white text-sm px-3 py-1 rounded shadow-lg whitespace-nowrap`}
+          className={`absolute ${positionClasses[position]} hidden group-hover:block bg-gray-800 text-white text-sm px-3 py-1 rounded shadow-lg whitespace-nowrap `}
         >
           {text}
         </div>

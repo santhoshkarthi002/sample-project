@@ -1,11 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import EditProduct from "./features/products/routes/EditProduct";
-import ProductList from "./features/products/routes/ProductList";
-import RootLayout from "./layouts/RootLayout";
-import AddProduct from "./features/products/routes/AddProduct";
-import { ProtectedRoute } from "./layouts/ProtectedRoute";
 import Login from "./auth/login/routes/Login";
 import Register from "./auth/register/routes/Register";
+import Analytics from "./features/analytics/routes/Analytics";
+import Dashboard from "./features/dashboard/routes/Dashboard";
+import Orders from "./features/orders/routes/Orders";
+import AddProduct from "./features/products/routes/AddProduct";
+import EditProduct from "./features/products/routes/EditProduct";
+import ProductList from "./features/products/routes/ProductList";
+import Projects from "./features/projects/routes/Projects";
+import Reports from "./features/reports/routes/Reports";
+import { ProtectedRoute } from "./layouts/ProtectedRoute";
+import RootLayout from "./layouts/RootLayout";
 
 export const routes = createBrowserRouter([
   {
@@ -17,7 +22,7 @@ export const routes = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: "/admin",
+    path: "/",
     element: (
       <ProtectedRoute>
         <RootLayout />
@@ -26,37 +31,37 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "dashboard",
-        element: <div>Dashboard</div>,
+        element: <Dashboard />,
       },
       {
         path: "analytics",
-        element: <div>Analytics</div>,
+        element: <Analytics />,
       },
       {
         path: "reporting",
-        element: <div>Reporting</div>,
+        element: <Reports />,
       },
       {
         path: "projects",
-        element: <div>Projects</div>,
+        element: <Projects />,
       },
       {
         path: "orders",
-        element: <div>Orders</div>,
+        element:  <Orders />,
       },
       {
-        path: "products",
+        path: "",
         children: [
           {
-            path: "list",
+            path: "products",
             element: <ProductList />,
           },
           {
-            path: "add",
+            path: "products/add",
             element: <AddProduct />,
           },
           {
-            path: "edit/:id",
+            path: "products/:id",
             element: <EditProduct />,
           },
         ],

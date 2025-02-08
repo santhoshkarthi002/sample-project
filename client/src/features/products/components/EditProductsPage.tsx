@@ -26,7 +26,7 @@ export const EditProductsPage = ({ data }: { data: Product }) => {
       .put( `/products/${id}`, data)
       .then((res) => {
         console.log(res);
-        navigate("/admin/product-list");
+        navigate("/product-list");
       })
       .catch((err) => {
         console.log(err);

@@ -1,17 +1,35 @@
-import ButtonElement from "@/components/ButtonElement";
-import HeaderElement from "@/components/HeaderElement";
-import DataTable, { Column } from "@/components/list/DataTable";
-import { useGetData } from "@/hooks/useGetData";
-import { Link, useNavigate } from "react-router-dom";
-import { Product } from "../types";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { axiosInstance } from "@/axios";
+import Breadcrumb from "@/components/Breadcrumb";
+import ButtonElement from "@/components/ButtonElement";
+import { useHeader } from "@/contexts/HeaderContext";
+import { useGetData } from "@/hooks/useGetData";
+import { useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Product } from "../types";
+import Card1 from "@/components/cards/Card1";
 
 const ProductList = () => {
   const navigate = useNavigate();
 
-  const { data, refetch } = useGetData<Product[]>({
+  const { setHeader, setAction } = useHeader();
+
+  useLayoutEffect(() => {
+    setHeader("Products");
+    setAction(
+      <ButtonElement
+        label="Add Product"
+        onClick={() => navigate("/products/add")}
+      />
+    );
+  }, [navigate, setAction, setHeader]);
+
+  const { data, refetch, loading } = useGetData<Product[]>({
     url: "/products",
   });
+  console.log("data :", data);
+
+  const products = data || [];
 
   const handleDelete = async (id: number) => {
     axiosInstance
@@ -25,77 +43,23 @@ const ProductList = () => {
       });
   };
 
-  const columns: Column<Product>[] = [
-    {
-      name: "Product name",
-      header: "Product name",
-      accessorKey: "name",
-      minWidth: 200,
-      maxWidth: 200,
-      renderCell: ({ row }: { row: Product }) => (
-        <Link
-          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          to={`/admin/products/edit/${row.id}`}
-        >
-          {row.name}
-        </Link>
-      ),
-    },
-    {
-      name: "Color",
-      header: "Color",
-      accessorKey: "color",
-      minWidth: 100,
-      maxWidth: 100,
-    },
-    {
-      name: "Category",
-      header: "Category",
-      accessorKey: "category",
-      minWidth: 100,
-      maxWidth: 100,
-    },
-    {
-      name: "Price",
-      header: "Price",
-      accessorKey: "price",
-      minWidth: 100,
-      maxWidth: 100,
-    },
-    {
-      name: "Action",
-      header: "Action",
-      minWidth: 100,
-      maxWidth: 100,
-      renderCell: ({ row }: { row: Product }) => (
-        <div className="flex justify-start">
-          <ButtonElement
-            size="medium"
-            variant="text"
-            colorVariant="danger"
-            onClick={() => handleDelete(row.id)}
-            label="Delete"
-          />
-        </div>
-      ),
-    },
-  ];
-
   return (
-    <div className="container mt-4">
-      <HeaderElement
+    <div className="container">
+      {loading && <div>Loading...</div>}
+      <Breadcrumb
         header="Products"
         action={
-          <div className="flex justify-end">
-            <ButtonElement
-              onClick={() => navigate("/admin/products/add")}
-              label="Add Product"
-            />
-          </div>
+          <ButtonElement
+            label="Add Product"
+            onClick={() => navigate("/products/add")}
+          />
         }
       />
-      <div className="my-5">
-        <DataTable columns={columns} tableData={data || []} />
+
+      <div className="flex flex-wrap justify-start gap-6 my-5">
+        {products.map((item) => (
+          <Card1 key={item.id} data={item} />
+        ))}
       </div>
     </div>
   );

@@ -4,13 +4,20 @@ import HeaderElement from "./HeaderElement";
 
 const RootLayout = () => {
   return (
-    <div className=" flex flex-col">
-      <HeaderElement />
-      <div className="flex flex-row justify-center">
+    <div className="bg-gray-300 min-h-screen flex">
+      {/* Fixed Header Wrapper */}
+      <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+        <HeaderElement />
+      </div>
+
+      {/* Fixed Sidebar Wrapper */}
+      <div className="fixed top-[60px] left-0 h-[calc(100vh-60px)] w-[250px] z-40">
         <SideBar />
-        <div className=" flex flex-col mx-auto w-[1500px] h-[720px] px-3">
-          <Outlet />
-        </div>
+      </div>
+
+      {/* Main Content Wrapper */}
+      <div className="flex-1 ml-[250px] mt-[60px] h-[calc(100vh-60px)] overflow-auto px-3">
+        <Outlet />
       </div>
     </div>
   );
