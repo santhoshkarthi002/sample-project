@@ -1,21 +1,11 @@
 import { Product } from "@/features/products/types";
-import { decompressBase64 } from "@/features/products/utils";
-import { useState, useEffect } from "react";
 import { BsCurrencyDollar } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Card1 = ({ data }: { data: Product }) => {
-  const { name, image, brand, description, price } = data;
+  const { name, image, brand, description, price, id } = data;
+  const navigate = useNavigate();
 
-  const [decompressedImage, setDecompressedImage] = useState("");
-  console.log("decompressedImage :", decompressedImage);
-
-  useEffect(() => {
-    if (image) {
-      decompressBase64(image, 1000, 1000).then((resizedBase64) => {
-        setDecompressedImage(resizedBase64);
-      });
-    }
-  }, [image]);
   return (
     <div>
       <div className="max-w-[700px] mx-auto">
@@ -46,6 +36,7 @@ const Card1 = ({ data }: { data: Product }) => {
             <button
               className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-blue-400 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
               type="button"
+              onClick={() => navigate(`/products/view/${id}`)}
             >
               View Details
             </button>

@@ -1,0 +1,5 @@
+//  rename column
+// npx prisma migrate dev --name rename_column
+
+// for genarate prisma client
+// npx prisma generate

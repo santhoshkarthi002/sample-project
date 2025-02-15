@@ -11,6 +11,7 @@ import Projects from "./features/projects/routes/Projects";
 import Reports from "./features/reports/routes/Reports";
 import { ProtectedRoute } from "./layouts/ProtectedRoute";
 import RootLayout from "./layouts/RootLayout";
+import ViewProduct from "./features/products/routes/ViewProduct";
 
 export const routes = createBrowserRouter([
   {
@@ -50,21 +51,26 @@ export const routes = createBrowserRouter([
         element:  <Orders />,
       },
       {
-        path: "",
+        path: "products",
         children: [
           {
-            path: "products",
+            path: "",
             element: <ProductList />,
           },
           {
-            path: "products/add",
+            path: "add",
             element: <AddProduct />,
           },
           {
-            path: "products/:id",
+            path: "edit/:id",
             element: <EditProduct />,
           },
+          {
+            path: "view/:id",
+            element: <ViewProduct />,
+          },
         ],
+        
       },
       {
         path: "inbox",

@@ -1,8 +1,7 @@
 import { addProduct, fetchAllProducts, fetchProductById, modifyProduct, removeProduct } from "../services/productsServices";
 
-export const createUserController = async (req: any, res: any) => {
+export const createProductController = async (req: any, res: any) => {
   try {
-    console.log('req.body :', req.body);
     const product = await addProduct({
       data: req.body,
     });
@@ -13,7 +12,7 @@ export const createUserController = async (req: any, res: any) => {
   }
 };
 
-export const getAllUsersController = async (req: any, res: any) => {
+export const getAllProductsController = async (req: any, res: any) => {
   try {
     const products = await fetchAllProducts();
     return res.status(200).json(products);
@@ -23,9 +22,10 @@ export const getAllUsersController = async (req: any, res: any) => {
   }
 };
 
-export const getUserByIdController = async (req: any, res: any) => {
+export const getProductByIdController = async (req: any, res: any) => {
   try {
-    const products = await fetchProductById(req.params.id);
+    const productId = parseInt(req.params.id, 10);
+    const products = await fetchProductById(productId);
     return res.status(200).json(products);
   } catch (err) {
     console.error(err);
@@ -33,7 +33,7 @@ export const getUserByIdController = async (req: any, res: any) => {
   }
 };
 
-export const updateUserController = async (req: any, res: any) => {
+export const updateProductController = async (req: any, res: any) => {
   try {
     const product = await modifyProduct(req.params.id, req.body);
     return res.status(200).json(product);
@@ -43,7 +43,7 @@ export const updateUserController = async (req: any, res: any) => {
   }
 };
 
-export const deleteUserController = async (req: any, res: any) => {
+export const deleteProductController = async (req: any, res: any) => {
   try {
     const product = await removeProduct(req.params.id);
     return res.status(200).json(product);

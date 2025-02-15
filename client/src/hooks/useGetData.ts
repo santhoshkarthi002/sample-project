@@ -50,6 +50,7 @@ export const useGetData = <T>({
   const [success, setSuccess] = React.useState<boolean>(false);
 
   const formattedUrl = formatUrl(url, pathParams, queryParams);
+  console.log('formattedUrl :', formattedUrl);
 
   const fetchData = useCallback(() => {
     if (!url) return;

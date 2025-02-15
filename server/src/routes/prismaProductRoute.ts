@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { createUserController, deleteUserController, getAllUsersController, getUserByIdController, updateUserController } from "../controllers/productPrismaController";
+import { createProductController, deleteProductController, getAllProductsController, getProductByIdController, updateProductController } from "../controllers/productPrismaController";
 
 const router = Router();
 
-router.post("/", createUserController);
-router.get("/", getAllUsersController);
-router.get("/:id", getUserByIdController);
-router.put("/:id", updateUserController);
-router.delete("/:id", deleteUserController);
+router.post("/", createProductController);
+router.get("/", getAllProductsController);
+router.get("/:id", getProductByIdController);
+router.put("/:id", updateProductController);
+router.delete("/:id", deleteProductController);
 
 export default router;

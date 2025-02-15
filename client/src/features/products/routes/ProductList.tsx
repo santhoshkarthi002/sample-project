@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { axiosInstance } from "@/axios";
 import Breadcrumb from "@/components/Breadcrumb";
 import ButtonElement from "@/components/ButtonElement";
+import Card1 from "@/components/cards/Card1";
 import { useHeader } from "@/contexts/HeaderContext";
 import { useGetData } from "@/hooks/useGetData";
 import { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../types";
-import Card1 from "@/components/cards/Card1";
 
 const ProductList = () => {
   const navigate = useNavigate();
@@ -24,24 +22,25 @@ const ProductList = () => {
     );
   }, [navigate, setAction, setHeader]);
 
-  const { data, refetch, loading } = useGetData<Product[]>({
+  console.log('render')
+
+  const { data, loading } = useGetData<Product[]>({
     url: "/products",
   });
-  console.log("data :", data);
 
   const products = data || [];
 
-  const handleDelete = async (id: number) => {
-    axiosInstance
-      .delete(`/products/${id}`)
-      .then(() => {
-        console.log("Deleted");
-        refetch();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+  // const handleDelete = async (id: number) => {
+  //   axiosInstance
+  //     .delete(`/products/${id}`)
+  //     .then(() => {
+  //       console.log("Deleted");
+  //       refetch();
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
   return (
     <div className="container">

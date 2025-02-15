@@ -14,7 +14,7 @@ import { createProduct, deleteProduct, getAllProducts, getProductById, updatePro
   };
 
   export const modifyProduct = async (id: number, product: any) => {
-    return await updateProduct(id, product);
+    return await updateProduct(id, product.data);
   };
 
   export const removeProduct = async (id: number) => {

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-const Login = require("../models/loginModel");
+import { findUserByEmail } from "../models/loginModel";
 const bcrypt = require("bcryptjs");
 const { genarateToken } = require("../utils/jwtutils");
 
@@ -13,7 +13,7 @@ exports.login = async (req: Request, res: Response) => {
         .json({ message: "Please provide email and password" });
     }
 
-    const login = await Login.findUserByEmail(email);
+    const login = await findUserByEmail(email);
     if (!login) {
       return res.status(404).json({ message: "User not found" });
     }

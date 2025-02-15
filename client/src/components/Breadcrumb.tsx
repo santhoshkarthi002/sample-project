@@ -61,7 +61,7 @@ const Breadcrumb = ({
                   </span>
                 ) : (
                   <Link
-                    to={routeTo}
+                    to={'#'}
                     className="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium dark:text-gray-400 dark:hover:text-white"
                   >
                     {name.charAt(0).toUpperCase() + name.slice(1)}
